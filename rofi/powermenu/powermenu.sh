@@ -11,8 +11,8 @@
 ## style-6   style-7   style-8   style-9   style-10
 
 # Current Theme
-dir="$HOME/.config/rofi/powermenu/type-2"
-theme='style-2'
+dir="$HOME/.config/rofi/powermenu"
+theme='styles'
 
 # CMDs
 uptime="`uptime -p | sed -e 's/up //g'`"
@@ -64,7 +64,7 @@ run_cmd() {
         hyprlock
         exit 0
     fi
-	
+
 	selected="$(confirm_exit)"
 	if [[ "$selected" == "$yes" ]]; then
 
