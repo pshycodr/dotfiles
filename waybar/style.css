@@ -1,0 +1,153 @@
+/* Catppuccin Mocha Palette */
+@import url('./colors/catpuccine.css');
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+}
+
+/* LEFT SIDE - Clock + Workspaces */
+.modules-left {
+    background-color: @base;
+    border-radius: 20px;
+    padding: 4px 12px;
+    border: 1px solid @surface0;
+}
+
+/* Clock */
+#clock {
+    color: @mauve;
+    font-size: 15px;
+    font-weight: bold;
+    /* margin-right: 12px; */
+    /* padding-right: 12px; */
+    /* border-right: 2px solid @surface0; */
+}
+
+/* Workspaces */
+#workspaces {
+    padding: 0;
+}
+
+#workspaces button {
+    padding: 4px 10px;
+    margin: 0 2px;
+    color: @surface1;
+    background: transparent;
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
+}
+
+#workspaces button.active {
+    color: #212121;
+    background: @mauve;
+    padding: 4px 12px;
+}
+
+#workspaces button:hover {
+    color: @text;
+    background: @surface0;
+}
+
+#workspaces button.urgent {
+    color: @red;
+    background: @surface0;
+}
+
+/* CENTER - System Tray */
+.modules-center {
+    background-color: @base;
+    border-radius: 20px;
+    padding: 4px 12px;
+    border: 1px solid @surface0;
+}
+
+#tray {
+    padding: 0 4px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @red;
+    border-radius: 8px;
+}
+
+/* RIGHT SIDE - Audio, Network, Battery, Notifications */
+.modules-right {
+    background-color: @base;
+    border-radius: 20px;
+    padding: 4px 12px;
+    border: 1px solid @surface0;
+}
+
+.modules-right > * {
+    margin: 0 6px;
+}
+
+/* PulseAudio */
+#pulseaudio {
+    color: @yellow;
+}
+
+#pulseaudio.muted {
+    color: @surface1;
+}
+
+/* Network */
+#network {
+    color: @peach;
+    margin: 0px 12px 0px 12px;
+}
+
+#network.disconnected {
+    color: @surface1;
+    margin: 0px 12px 0px 12px;
+}
+
+/* Battery */
+#battery {
+    color: @green;
+    margin: 0px 12px 0px 12px;
+}
+
+#battery.charging {
+    color: @teal;
+}
+
+#battery.warning:not(.charging) {
+    color: @peach;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+}
+
+/* Custom Notification */
+#custom-notification {
+    color: @sapphire;
+    margin: 0px 12px 0px 12px;
+}
+
+/* Tooltip */
+tooltip {
+    background: @base;
+    border: 1px solid @surface0;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+tooltip label {
+    color: @text;
+}

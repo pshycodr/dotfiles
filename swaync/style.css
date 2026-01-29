@@ -1,0 +1,124 @@
+:root {
+  /* Catppuccin Mocha base */
+  --base: #1e1e2e;
+  --mantle: #181825;
+  --crust: #11111b;
+  --text: #cdd6f4;
+  --surface0: #313244;
+  --surface1: #45475a;
+
+  /* Decoration tuning */
+  --bg-opacity: 0.65;          /* lower opacity = stronger perceived blur */
+  --border-radius: 12px;
+  --border-width: 1px;
+  --border-color: var(--surface0);
+
+  /* Shadow kept subtle to avoid visual stacking bloat */
+  --shadow: 0 4px 10px rgba(0,0,0,0.35);
+
+  /* Size configurations (moved from deprecated config.json settings) */
+  --notification-icon-size: 50px;
+  --mpris-album-art-icon-size: 50px;
+}
+
+* {
+  font-family: 'JetBrains Mono Nerd Font', 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+/* Control center surface (blur handled by Hyprland layerrule) */
+.control-center {
+  background: rgba(30,30,46,var(--bg-opacity));
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+/* Outer widget container – keep tight to avoid compounding margins */
+.widgets {
+  padding: 8px;
+}
+
+/* Notification row spacing – vertical stack only */
+.control-center .notification-row {
+  margin: 4px 0;
+}
+
+/* Actual notification card */
+.notification-content {
+  padding: 8px;
+  background: rgba(24,24,37,0.85);
+  border-radius: 10px;
+  border: 1px solid var(--surface0);
+  box-shadow: none; /* avoid nested shadow inflation */
+}
+
+/* Hover feedback without layout expansion */
+.notification-content:hover {
+  background: rgba(30,30,46,0.9);
+  border-color: var(--surface1);
+}
+
+/* Visual separation between stacked notifications */
+.control-center .notification-row:not(:last-child) {
+  border-bottom: 1px solid var(--surface0);
+}
+
+/* Notification actions */
+.notification-default-action,
+.notification-action {
+  padding: 4px;
+  background: transparent;
+  border-radius: 8px;
+  color: var(--text);
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+  background: var(--surface0);
+}
+
+/* Titles & body */
+.summary {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.body {
+  color: #a6adc8;
+}
+
+/* Sliders (volume / backlight) kept compact */
+.widget-volume,
+.widget-backlight {
+  padding: 8px;
+  margin: 4px 8px;
+  background: rgba(30,30,46,var(--bg-opacity));
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--border-color);
+}
+
+/* MPRIS widget */
+.widget-mpris {
+  padding: 1px;
+  margin: 4px 8px;
+  background: rgba(30,30,46,var(--bg-opacity));
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--border-color);
+}
+
+/* MPRIS album art with border radius */
+.widget-mpris-album-art {
+  border-radius: 0px;
+}
+
+/* DND / inhibitors */
+.widget-dnd,
+.widget-inhibitors {
+  padding: 6px 8px;
+  margin: 4px 8px;
+  background: rgba(30,30,46,var(--bg-opacity));
+  border-radius: var(--border-radius);
+  border: var(--border-width) solid var(--border-color);
+}

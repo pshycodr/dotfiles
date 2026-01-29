@@ -1,0 +1,71 @@
+# ======================
+# Font
+# ======================
+font:
+  normal:
+    family: GeistMono Nerd Font Mono
+    style: Regular
+  size: 15.0
+
+# ======================
+# Shell
+# ======================
+shell:
+  program: /usr/bin/zsh
+
+# ======================
+# Colors — Catppuccin Mocha
+# ======================
+colors:
+  primary:
+    background: '#1e1e2e'
+    foreground: '#cdd6f4'
+
+  cursor:
+    text: '#1e1e2e'
+    cursor: '#f5e0dc'
+
+  selection:
+    background: '#313244'
+    foreground: '#cdd6f4'
+
+  normal:
+    black:   '#45475a'
+    red:     '#f38ba8'
+    green:   '#a6e3a1'
+    yellow:  '#f9e2af'
+    blue:    '#89b4fa'
+    magenta: '#cba6f7'
+    cyan:    '#94e2d5'
+    white:   '#bac2de'
+
+  bright:
+    black:   '#585b70'
+    red:     '#f38ba8'
+    green:   '#a6e3a1'
+    yellow:  '#f9e2af'
+    blue:    '#89b4fa'
+    magenta: '#cba6f7'
+    cyan:    '#94e2d5'
+    white:   '#a6adc8'
+
+# ======================
+# Window
+# ======================
+window:
+  padding:
+    x: 12
+    y: 12
+  opacity: 0.85
+
+# ======================
+# Cursor
+# ======================
+cursor:
+  style:
+    blinking: Never
+
+# ======================
+# Performance
+# ======================
+live_config_reload: true

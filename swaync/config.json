@@ -1,0 +1,111 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "positionX": "right",
+  "positionY": "top",
+  "cssPriority": "user",
+  "layer": "overlay",
+  "control-center-layer": "top",
+  "layer-shell": true,
+  "control-center-width": 400,
+  "control-center-height": 750,
+  "control-center-margin-top": 15,
+  "control-center-margin-bottom": 10,
+  "control-center-margin-right": 12,
+  "control-center-margin-left": 0,
+  "notification-window-width": 380,
+  "notification-body-image-height": 200,
+  "notification-body-image-width": 200,
+  "timeout": 8,
+  "timeout-low": 6,
+  "timeout-critical": 0,
+  "fit-to-screen": false,
+  "keyboard-shortcuts": true,
+  "image-visibility": "when-available",
+  "transition-time": 200,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "text-empty": "No Notifications",
+  "script-fail-notify": true,
+  "notification-visibility": {
+    "example-name": {
+      "state": "muted",
+      "urgency": "Low",
+      "app-name": "Spotify"
+    }
+  },
+  "widgets": [
+    "buttons-grid",
+    "backlight",
+    "mpris",
+    "title",
+    "notifications"
+  ],
+  "widget-config": {
+    "notifications": {
+      "vexpand": false
+    },
+    "mpris": {
+    },
+    "volume": {
+      "label": " 󰕾 ",
+      "expand-button-label": "",
+      "collapse-button-label": "",
+      "show-per-app": true,
+      "show-per-app-icon": true,
+      "show-per-app-label": false
+    },
+    "backlight": {
+      "label": "󰃟 ",
+      "device": "intel_backlight",
+      "subsystem": "backlight",
+      "min": 5
+    },
+    "dnd": {
+      "text": "Do Not Disturb"
+    },
+    "title": {
+      "text": "Notifications",
+      "clear-all-button": true,
+      "button-text": " 󰆴 "
+    },
+    "buttons-grid": {
+      "buttons-per-row": 3,
+      "actions": [
+        {
+          "label": "󰖩 ",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
+          "update-command": "sh -c '[[ $(nmcli r wifi) == \"enabled\" ]] && echo true || echo false'"
+        },
+        {
+          "label": "󰂯",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && rfkill unblock bluetooth || rfkill block bluetooth'",
+          "update-command": "sh -c \"rfkill list bluetooth | grep -q \"Soft blocked: no\" && echo true || echo false\""
+        },
+        {
+          "label": " ",
+          "type": "toggle",
+          "active": false,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && pactl set-source-mute @DEFAULT_SOURCE@ 1 || pactl set-source-mute @DEFAULT_SOURCE@ 0'",
+          "update-command": "sh -c '[[ $(pactl get-source-mute @DEFAULT_SOURCE@) == *yes* ]] && echo true || echo false'"
+        },
+        {
+          "label": "󰖁 ",
+          "type": "toggle",
+          "active": false,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && pactl set-sink-mute @DEFAULT_SINK@ 1 || pactl set-sink-mute @DEFAULT_SINK@ 0'",
+          "update-command": "sh -c '[[ $(pactl get-sink-mute @DEFAULT_SINK@) == *yes* ]] && echo true || echo false'"
+        },
+        {
+          "label": "󰖨",
+          "type": "toggle",
+          "command": "if [ \"$SWAYNC_TOGGLE_STATE\" = \"true\" ]; then hyprctl dispatch exec 'hyprsunset --temperature 4500'; else pkill -INT hyprsunset; fi",
+          "update-command": "pgrep -x hyprsunset >/dev/null && echo true || echo false"
+        }
+      ]
+    }
+  }
+}
