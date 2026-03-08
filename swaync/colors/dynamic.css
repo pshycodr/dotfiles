@@ -1,17 +1,17 @@
 /* Dynamic colors — auto-generated from wallpaper */
 :root {
-    --base: #17130b;
-    --mantle: #211c14;
-    --crust: #0e0a04;
-    --text: #fef3e6;
-    --subtext: #d1c5b4;
-    --surface0: #29241b;
-    --surface1: #342e26;
-    --surface2: #3f3930;
-    --overlay0: #4e4639;
-    --accent: #ebc06c;
-    --accent-text: #2d1e00;
-    --secondary: #d9c4a0;
+    --base: #0e1416;
+    --mantle: #181e1f;
+    --crust: #060b0d;
+    --text: #f0f5f7;
+    --subtext: #bfc8cb;
+    --surface0: #202527;
+    --surface1: #2a3032;
+    --surface2: #353b3d;
+    --overlay0: #3f484b;
+    --accent: #83d2e4;
+    --accent-text: #00252c;
+    --secondary: #b2cbd1;
     --error: #ffb4ab;
-    --border-color: #342e26;
+    --border-color: #2a3032;
 }

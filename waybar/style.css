@@ -1,56 +1,91 @@
 @import "colors/dynamic.css";
 
+/* ─────────────────────────────────────────────
+   RESET
+───────────────────────────────────────────── */
+
 * {
-    font-family: "JetBrainsMono Nerd Font", "Roboto", sans-serif;
-    font-size: 14px;
-    font-weight: bold;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+    font-weight: 500;
     border: none;
     border-radius: 0;
     min-height: 0;
+    padding: 0;
+    margin: 0;
 }
 
 window#waybar {
-    background-color: transparent;
+    background: transparent;
 }
 
-/* LEFT SIDE */
-.modules-left {
+/* ─────────────────────────────────────────────
+   ALL PILLS — shared base
+───────────────────────────────────────────── */
+
+.modules-left,
+.modules-center,
+.modules-right {
     background-color: @surface1;
-    border-radius: 20px;
-    padding: 4px 12px;
+    border-radius: 24px;
     border: 1px solid @surface2;
+    padding: 3px 12px;
 }
 
-/* Clock */
-#clock {
-    color: @text;
-    font-size: 15px;
-    font-weight: bold;
+/* ─────────────────────────────────────────────
+   RIGHT SIDE — two visually distinct groups
+   Stats (cpu/mem/speed) get a slightly darker
+   pill via box-shadow tint so they read as
+   secondary info without a second HTML element.
+───────────────────────────────────────────── */
+
+/* The stats modules — cpu, memory, network#speed —
+   are visually grouped by giving them a shared
+   left-border as a soft internal divider */
+#cpu {
+    border-left: 1px solid @surface2;
+    padding-left: 12px;
+    margin-left: 4px;
 }
 
-/* Workspaces */
+#network.speed {
+    border-right: 1px solid @surface2;
+    padding-right: 12px;
+    margin-right: 4px;
+}
+
+#custom-arch {
+    padding-right: 15px;
+    border-right: 2px solid @surface2;
+    margin-right: 8px;
+    color: @mauve;
+    font-size: 18px;
+}
+
+/* ─────────────────────────────────────────────
+   WORKSPACES
+───────────────────────────────────────────── */
+
 #workspaces {
     padding: 0;
 }
 
 #workspaces button {
-    padding: 4px 10px;
-    margin: 0 2px;
-    color: @subtext0;
+    min-width: 26px;
+    padding: 2px 8px;
+    margin: 2px 2px;
+    color: @subtext1;
     background: transparent;
-    border-radius: 12px;
-    transition: all 0.15s ease-in-out;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.15s ease;
 }
 
 #workspaces button.active {
     color: @base;
     background: @mauve;
-    padding: 4px 12px;
-}
-
-#workspaces button:hover {
-    color: @text;
-    background: @surface2;
+    padding: 2px 12px;
 }
 
 #workspaces button.urgent {
@@ -58,66 +93,100 @@ window#waybar {
     background: @surface2;
 }
 
-/* CENTER */
-.modules-center {
-    background-color: @surface1;
-    border-radius: 20px;
-    padding: 4px 12px;
-    border: 1px solid @surface2;
+#workspaces button:hover {
+    color: @text;
+    background: @surface2;
 }
 
-#tray {
-    padding: 0 4px;
+/* ─────────────────────────────────────────────
+   CLOCK
+───────────────────────────────────────────── */
+
+#clock {
+    color: @text;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0 6px;
 }
 
-#tray > .passive {
-    -gtk-icon-effect: dim;
+/* ─────────────────────────────────────────────
+   CPU
+───────────────────────────────────────────── */
+
+#cpu {
+    color: @blue;
+    padding: 0 10px;
+    transition: color 0.2s ease;
 }
 
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: @red;
-    border-radius: 8px;
+#cpu.warning { color: @yellow; }
+#cpu.critical { color: @red; }
+
+/* ─────────────────────────────────────────────
+   MEMORY
+───────────────────────────────────────────── */
+
+#memory {
+    color: @blue;
+    padding: 0 10px;
+    transition: color 0.2s ease;
 }
 
-/* RIGHT SIDE */
-.modules-right {
-    background-color: @surface1;
-    border-radius: 20px;
-    padding: 4px 12px;
-    border: 1px solid @surface2;
+#memory.warning { color: @yellow; }
+#memory.critical { color: @red; }
+
+/* ─────────────────────────────────────────────
+   NETWORK SPEED
+───────────────────────────────────────────── */
+
+#network.speed {
+    color: @blue;
+    padding: 0 10px;
+    font-size: 11px;
 }
 
-.modules-right > * {
-    margin: 0 6px;
-}
 
-/* Audio */
+
+/* ─────────────────────────────────────────────
+   AUDIO
+───────────────────────────────────────────── */
+
 #pulseaudio {
     color: @yellow;
+    padding: 0 10px;
+    transition: color 0.15s ease;
 }
 
 #pulseaudio.muted {
-    color: @subtext0;
+    color: @overlay1;
 }
 
-/* Network */
+/* ─────────────────────────────────────────────
+   NETWORK (SSID)
+───────────────────────────────────────────── */
+
 #network {
     color: @peach;
-    margin: 0px 12px;
+    padding: 0 10px;
 }
 
 #network.disconnected {
-    color: @subtext0;
+    color: @overlay1;
 }
 
-/* Battery */
+/* ─────────────────────────────────────────────
+   BATTERY
+───────────────────────────────────────────── */
+
 #battery {
     color: @green;
-    margin: 0px 12px;
+    padding: 0 10px;
+    transition: color 0.2s ease;
 }
 
-#battery.charging {
+#battery.charging,
+#battery.plugged {
     color: @teal;
 }
 
@@ -127,22 +196,51 @@ window#waybar {
 
 #battery.critical:not(.charging) {
     color: @red;
+    animation: blink 1s steps(1) infinite;
 }
 
-/* Notification icon */
+@keyframes blink {
+    0%   { color: @red; }
+    50%  { color: @overlay1; }
+    100% { color: @red; }
+}
+
+/* ─────────────────────────────────────────────
+   NOTIFICATION
+───────────────────────────────────────────── */
+
 #custom-notification {
     color: @sapphire;
-    margin: 0px 12px;
+    font-size: 14px;
+    padding: 0 8px;
 }
 
-/* Tooltip */
+#custom-notification.dnd-none,
+#custom-notification.dnd-notification {
+    color: @overlay1;
+}
+
+/* ─────────────────────────────────────────────
+   BLUETOOTH
+───────────────────────────────────────────── */
+
+#custom-bluetooth-battery {
+    color: @blue;
+    padding: 0 10px;
+}
+
+/* ─────────────────────────────────────────────
+   TOOLTIP
+───────────────────────────────────────────── */
+
 tooltip {
     background: @surface1;
     border: 1px solid @surface2;
     border-radius: 12px;
-    padding: 8px;
+    padding: 8px 12px;
 }
 
 tooltip label {
     color: @text;
+    font-size: 12px;
 }
