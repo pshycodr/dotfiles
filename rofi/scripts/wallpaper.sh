@@ -19,4 +19,4 @@ done | rofi -dmenu -theme ~/.config/rofi/wallpaper.rasi)
 
 [ -z "$choice" ] && exit
 
-~/.config/dotfiles/theme/apply-theme.sh "$choice"
+~/.config/dotfiles/theme/apply-theme.sh "$choice" 

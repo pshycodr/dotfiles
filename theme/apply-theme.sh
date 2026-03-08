@@ -8,10 +8,42 @@ WALL="$1"
 mkdir -p ~/.cache/matugen
 
 # ── Set wallpaper ─────────────────────────────────────────────────
-swww img "$WALL" --transition-type grow --transition-duration 5
+swww img "$WALL" --transition-type grow --transition-duration 3
+
+# ── Auto-extract dominant color using ImageMagick ─────────────────
+# Resize to speed up, quantize to 1 color, output as hex
+SOURCE_COLOR=$(convert "$WALL" \
+  -resize 200x200^ \
+  -gravity center \
+  -extent 200x200 \
+  +dither -quantize transparent -colors 1 \
+  -unique-colors txt:- 2>/dev/null \
+  | grep -v '^#' \
+  | head -1 \
+  | grep -oP '#[0-9A-Fa-f]{6}')
+
+# Fallback: k-means dominant color
+if [ -z "$SOURCE_COLOR" ]; then
+  SOURCE_COLOR=$(convert "$WALL" \
+    -resize 100x100! \
+    -kmeans 5 \
+    -unique-colors txt:- 2>/dev/null \
+    | grep -v '^#' \
+    | awk 'NR==1 { match($0, /#[0-9A-Fa-f]{6}/); print substr($0, RSTART, RLENGTH) }')
+fi
+
+# Fallback: average color of the image
+if [ -z "$SOURCE_COLOR" ]; then
+  SOURCE_COLOR=$(convert "$WALL" \
+    -resize 1x1! \
+    -format "%[fx:floor(255*r+.5)],%[fx:floor(255*g+.5)],%[fx:floor(255*b+.5)]" info: \
+    | awk -F',' '{ printf "#%02x%02x%02x\n", $1, $2, $3 }')
+fi
+
+echo "Using source color: $SOURCE_COLOR"
 
 # ── Extract colors with matugen ───────────────────────────────────
-matugen image "$WALL" \
+/home/pshycodr/.cargo/bin/matugen color hex "$SOURCE_COLOR" \
   -m dark \
   --type scheme-tonal-spot \
   --json hex \
@@ -24,7 +56,7 @@ matugen image "$WALL" \
 # ── Reload components ─────────────────────────────────────────────
 # Waybar
 pkill -x waybar; sleep 0.2
-waybar &
+waybar  &
 
 # SwayNC
 pkill -x swaync; sleep 0.2
