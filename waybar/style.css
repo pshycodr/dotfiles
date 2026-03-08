@@ -1,5 +1,43 @@
 @import "colors/dynamic.css";
 
+/*
+  COLOR MAPPING RATIONALE
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  The dynamic.css palette (generated from wallpaper):
+
+    @base          → darkest bg — not used on bar surface
+    @mantle        → pill background (one step above base)
+    @crust         → deepest bg, used nowhere visible
+    @text          → primary readable text — clock, active labels
+    @subtext0      → secondary text — readable but receded
+    @subtext1      → dimmer secondary — inactive workspace numbers
+
+    @surface0      → subtle bg tint
+    @surface1      → pill fill ✓
+    @surface2      → border / divider lines ✓
+
+    @overlay0      → disabled / muted / disconnected states
+    @overlay1      → slightly brighter disabled state
+
+    @mauve         → accent purple — active workspace pill fill
+    @blue          → (same as mauve in this palette) — not used
+                     separately to avoid identical-color confusion
+    @sapphire      → cool mid-tone — notification icon
+    @green         → positive / connected — battery good, wifi
+    @teal          → charging / uploading — battery charging, upload speed
+    @yellow        → caution / volume — audio, battery warning
+    @peach         → warm mid — network SSID label
+    @red           → error / critical — battery critical, urgent ws
+
+  FONT READABILITY FIXES
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - font-weight: 500 on most modules (was causing thin/hard-to-read text)
+  - font-weight: 600 on clock (needs to be the dominant element)
+  - font-weight: 600 on active workspace (selected state needs presence)
+  - font-size: 12px on network speed (dense numbers, smaller is cleaner)
+  - letter-spacing on clock only — gives it rhythm without cluttering others
+*/
+
 /* ─────────────────────────────────────────────
    RESET
 ───────────────────────────────────────────── */
@@ -20,28 +58,27 @@ window#waybar {
 }
 
 /* ─────────────────────────────────────────────
-   ALL PILLS — shared base
+   PILLS
+   @mantle as bg — darker than @surface1,
+   sits cleanly against the wallpaper without
+   competing with window borders
 ───────────────────────────────────────────── */
 
 .modules-left,
 .modules-center,
 .modules-right {
-    background-color: @surface1;
+    background-color: @mantle;
     border-radius: 24px;
     border: 1px solid @surface2;
     padding: 3px 12px;
 }
 
 /* ─────────────────────────────────────────────
-   RIGHT SIDE — two visually distinct groups
-   Stats (cpu/mem/speed) get a slightly darker
-   pill via box-shadow tint so they read as
-   secondary info without a second HTML element.
+   STAT GROUP DIVIDERS (cpu / memory / speed)
+   Use @surface2 — same as border, visually
+   continuous with the pill edge
 ───────────────────────────────────────────── */
 
-/* The stats modules — cpu, memory, network#speed —
-   are visually grouped by giving them a shared
-   left-border as a soft internal divider */
 #cpu {
     border-left: 1px solid @surface2;
     padding-left: 12px;
@@ -54,16 +91,12 @@ window#waybar {
     margin-right: 4px;
 }
 
-#custom-arch {
-    padding-right: 15px;
-    border-right: 2px solid @surface2;
-    margin-right: 8px;
-    color: @mauve;
-    font-size: 18px;
-}
-
 /* ─────────────────────────────────────────────
    WORKSPACES
+   Inactive: @subtext0 — visible but receded
+   Active: @base text on @mauve fill —
+     high contrast, accent-driven, clearly "selected"
+   Hover: @text on @surface1 — readable, neutral
 ───────────────────────────────────────────── */
 
 #workspaces {
@@ -74,11 +107,11 @@ window#waybar {
     min-width: 26px;
     padding: 2px 8px;
     margin: 2px 2px;
-    color: @subtext1;
+    color: @subtext0;
     background: transparent;
     border-radius: 16px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 500;
     transition: all 0.15s ease;
 }
 
@@ -86,70 +119,101 @@ window#waybar {
     color: @base;
     background: @mauve;
     padding: 2px 12px;
+    font-weight: 600;
 }
 
 #workspaces button.urgent {
     color: @red;
-    background: @surface2;
+    background: @surface1;
 }
 
 #workspaces button:hover {
     color: @text;
-    background: @surface2;
+    background: @surface1;
 }
 
 /* ─────────────────────────────────────────────
    CLOCK
+   @text — full brightness, the centerpiece.
+   Slightly larger, tracked, bold. This is the
+   one element that earns visual dominance.
 ───────────────────────────────────────────── */
 
 #clock {
     color: @text;
     font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     padding: 0 6px;
 }
 
 /* ─────────────────────────────────────────────
    CPU
+   @mauve — the accent. CPU is the most watched
+   stat so it gets the highest-contrast color.
+   Warning/critical shift toward danger naturally.
 ───────────────────────────────────────────── */
 
 #cpu {
-    color: @blue;
+    color: @mauve;
     padding: 0 10px;
     transition: color 0.2s ease;
 }
 
-#cpu.warning { color: @yellow; }
+#cpu.warning  { color: @yellow; }
 #cpu.critical { color: @red; }
 
 /* ─────────────────────────────────────────────
    MEMORY
+   @sapphire — cooler, distinct from CPU's mauve
+   so both stats are visually separable at a glance
 ───────────────────────────────────────────── */
 
 #memory {
-    color: @blue;
+    color: @sapphire;
     padding: 0 10px;
     transition: color 0.2s ease;
 }
 
-#memory.warning { color: @yellow; }
+#memory.warning  { color: @yellow; }
 #memory.critical { color: @red; }
 
 /* ─────────────────────────────────────────────
    NETWORK SPEED
+   @teal — coolest tone, feels "flowing/data".
+   Smaller font — numbers update fast and are dense.
+   @subtext0 on disconnect — nothing to show.
 ───────────────────────────────────────────── */
 
 #network.speed {
-    color: @blue;
+    color: @teal;
     padding: 0 10px;
-    font-size: 11px;
+    font-size: 12px;
+    font-weight: 500;
 }
 
+/* ─────────────────────────────────────────────
+   TRAY
+───────────────────────────────────────────── */
 
+#tray {
+    padding: 0 6px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @red;
+    border-radius: 6px;
+}
 
 /* ─────────────────────────────────────────────
    AUDIO
+   @yellow — universally associated with sound/volume.
+   Muted: @overlay0 — visually "off", not just dim.
 ───────────────────────────────────────────── */
 
 #pulseaudio {
@@ -159,24 +223,31 @@ window#waybar {
 }
 
 #pulseaudio.muted {
-    color: @overlay1;
+    color: @overlay0;
 }
 
 /* ─────────────────────────────────────────────
-   NETWORK (SSID)
+   NETWORK (SSID label)
+   @green — connected = good. Clean association.
+   Disconnected: @overlay0 — clearly inactive.
 ───────────────────────────────────────────── */
 
 #network {
-    color: @peach;
+    color: @green;
     padding: 0 10px;
 }
 
 #network.disconnected {
-    color: @overlay1;
+    color: @overlay0;
 }
 
 /* ─────────────────────────────────────────────
    BATTERY
+   @green   → healthy charge
+   @teal    → charging (warm-cool transition, feels active)
+   @yellow  → warning — familiar caution signal
+   @red     → critical — danger, blinks
+   @overlay0 in blink alternate — hard off/on, urgent
 ───────────────────────────────────────────── */
 
 #battery {
@@ -201,46 +272,67 @@ window#waybar {
 
 @keyframes blink {
     0%   { color: @red; }
-    50%  { color: @overlay1; }
+    50%  { color: @overlay0; }
     100% { color: @red; }
 }
 
 /* ─────────────────────────────────────────────
-   NOTIFICATION
+   NOTIFICATION BELL
+   @subtext0 — neutral, it's a passive indicator.
+   DND states: @overlay0 — silenced, receded.
 ───────────────────────────────────────────── */
 
 #custom-notification {
-    color: @sapphire;
+    color: @subtext0;
     font-size: 14px;
     padding: 0 8px;
 }
 
+#custom-notification.notification {
+    color: @mauve;   /* unread — accent draws the eye */
+}
+
 #custom-notification.dnd-none,
-#custom-notification.dnd-notification {
-    color: @overlay1;
+#custom-notification.dnd-notification,
+#custom-notification.dnd-inhibited-none,
+#custom-notification.dnd-inhibited-notification {
+    color: @overlay0;
 }
 
 /* ─────────────────────────────────────────────
-   BLUETOOTH
+   BLUETOOTH BATTERY
+   @sapphire — bluetooth is conventionally blue,
+   sapphire is the closest cool tone available
 ───────────────────────────────────────────── */
 
 #custom-bluetooth-battery {
-    color: @blue;
+    color: @sapphire;
     padding: 0 10px;
 }
 
 /* ─────────────────────────────────────────────
    TOOLTIP
+   @mantle bg — matches pill bg for consistency.
+   @surface2 border — matches pill border.
 ───────────────────────────────────────────── */
 
 tooltip {
-    background: @surface1;
+    background: @mantle;
     border: 1px solid @surface2;
-    border-radius: 12px;
-    padding: 8px 12px;
+    border-radius: 10px;
+    padding: 6px 12px;
 }
 
 tooltip label {
     color: @text;
     font-size: 12px;
+    font-weight: 500;
+}
+
+#custom-arch {
+    padding-right: 15px;
+    border-right: 2px solid @surface2;
+    margin-right: 8px;
+    color: @mauve;
+    font-size: 18px;
 }
