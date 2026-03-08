@@ -80,5 +80,11 @@ if command -v gsettings &>/dev/null; then
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 fi
 
+if pgrep -x nautilus &>/dev/null; then
+  nautilus -q 2>/dev/null
+  sleep 0.3
+  nautilus --daemon &
+fi43
+
 # Disown background processes so they don't die with this script
 disown 2>/dev/null
