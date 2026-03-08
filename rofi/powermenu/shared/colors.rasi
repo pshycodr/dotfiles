@@ -2,7 +2,7 @@
  *
  * Author : Aditya Shakya (adi1090x)
  * Github : @adi1090x
- * 
+ *
  * Colors
  *
  * Available Colors Schemes
@@ -13,6 +13,6 @@
  *
  **/
 
-/* Import color-scheme from `colors` directory */
+/* Import dynamic wallpaper-based color-scheme */
 
-@import "~/.config/rofi/colors/catppuccin.rasi"
+@import "~/.config/rofi/colors/dynamic.rasi"

@@ -1,5 +1,4 @@
-/* Catppuccin Mocha Palette */
-@import url('./colors/catpuccine.css');
+@import "colors/dynamic.css";
 
 * {
     font-family: "JetBrainsMono Nerd Font", "Roboto", sans-serif;
@@ -14,22 +13,19 @@ window#waybar {
     background-color: transparent;
 }
 
-/* LEFT SIDE - Clock + Workspaces */
+/* LEFT SIDE */
 .modules-left {
-    background-color: @base;
+    background-color: @surface1;
     border-radius: 20px;
     padding: 4px 12px;
-    border: 1px solid @surface0;
+    border: 1px solid @surface2;
 }
 
 /* Clock */
 #clock {
-    color: @mauve;
+    color: @text;
     font-size: 15px;
     font-weight: bold;
-    /* margin-right: 12px; */
-    /* padding-right: 12px; */
-    /* border-right: 2px solid @surface0; */
 }
 
 /* Workspaces */
@@ -40,34 +36,34 @@ window#waybar {
 #workspaces button {
     padding: 4px 10px;
     margin: 0 2px;
-    color: @surface1;
+    color: @subtext0;
     background: transparent;
     border-radius: 12px;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.15s ease-in-out;
 }
 
 #workspaces button.active {
-    color: #212121;
+    color: @base;
     background: @mauve;
     padding: 4px 12px;
 }
 
 #workspaces button:hover {
     color: @text;
-    background: @surface0;
+    background: @surface2;
 }
 
 #workspaces button.urgent {
     color: @red;
-    background: @surface0;
+    background: @surface2;
 }
 
-/* CENTER - System Tray */
+/* CENTER */
 .modules-center {
-    background-color: @base;
+    background-color: @surface1;
     border-radius: 20px;
     padding: 4px 12px;
-    border: 1px solid @surface0;
+    border: 1px solid @surface2;
 }
 
 #tray {
@@ -84,42 +80,41 @@ window#waybar {
     border-radius: 8px;
 }
 
-/* RIGHT SIDE - Audio, Network, Battery, Notifications */
+/* RIGHT SIDE */
 .modules-right {
-    background-color: @base;
+    background-color: @surface1;
     border-radius: 20px;
     padding: 4px 12px;
-    border: 1px solid @surface0;
+    border: 1px solid @surface2;
 }
 
 .modules-right > * {
     margin: 0 6px;
 }
 
-/* PulseAudio */
+/* Audio */
 #pulseaudio {
     color: @yellow;
 }
 
 #pulseaudio.muted {
-    color: @surface1;
+    color: @subtext0;
 }
 
 /* Network */
 #network {
     color: @peach;
-    margin: 0px 12px 0px 12px;
+    margin: 0px 12px;
 }
 
 #network.disconnected {
-    color: @surface1;
-    margin: 0px 12px 0px 12px;
+    color: @subtext0;
 }
 
 /* Battery */
 #battery {
     color: @green;
-    margin: 0px 12px 0px 12px;
+    margin: 0px 12px;
 }
 
 #battery.charging {
@@ -127,23 +122,23 @@ window#waybar {
 }
 
 #battery.warning:not(.charging) {
-    color: @peach;
+    color: @yellow;
 }
 
 #battery.critical:not(.charging) {
     color: @red;
 }
 
-/* Custom Notification */
+/* Notification icon */
 #custom-notification {
     color: @sapphire;
-    margin: 0px 12px 0px 12px;
+    margin: 0px 12px;
 }
 
 /* Tooltip */
 tooltip {
-    background: @base;
-    border: 1px solid @surface0;
+    background: @surface1;
+    border: 1px solid @surface2;
     border-radius: 12px;
     padding: 8px;
 }

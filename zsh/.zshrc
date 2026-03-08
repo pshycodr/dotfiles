@@ -116,7 +116,7 @@ alias fm='nautilus'
 alias config='code ~/.config'
 alias ldoc='lazydocker'
 alias cd='z'
-alias cng-theme='~/.config/hypr/scripts/wallpaper.sh'
+alias cng-theme='~/.config/dotfiles/rofi/scripts/wallpaper.sh'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

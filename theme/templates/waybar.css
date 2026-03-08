@@ -1,0 +1,27 @@
+@define-color base ${background};
+@define-color mantle ${surface_container};
+@define-color crust ${surface_container_low};
+
+@define-color text ${onSurface};
+@define-color subtext0 ${onSurfaceVariant};
+@define-color subtext1 ${outline};
+
+@define-color surface0 ${surface};
+@define-color surface1 ${surface_container};
+@define-color surface2 ${surface_container_high};
+
+@define-color overlay0 ${surface_variant};
+@define-color overlay1 ${outline_variant};
+
+@define-color mauve ${primary};
+@define-color blue ${primary};
+
+@define-color sapphire ${secondary};
+
+@define-color green ${secondary};
+@define-color teal ${secondary_container};
+
+@define-color yellow ${tertiary};
+@define-color peach ${tertiary_container};
+
+@define-color red ${error};

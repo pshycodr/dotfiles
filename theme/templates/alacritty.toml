@@ -1,0 +1,31 @@
+[colors.primary]
+background = "${background}"
+foreground = "${onSurface}"
+
+[colors.cursor]
+cursor = "${primary}"
+text = "${background}"
+
+[colors.selection]
+background = "${surface_container_high}"
+foreground = "${onSurface}"
+
+[colors.normal]
+black = "${surface}"
+blue = "${primary}"
+cyan = "${secondary_container}"
+green = "${secondary}"
+magenta = "${tertiary}"
+red = "${error}"
+white = "${onSurface}"
+yellow = "${tertiary_container}"
+
+[colors.bright]
+black = "${surface_container_high}"
+blue = "${primary}"
+cyan = "${secondary_container}"
+green = "${secondary}"
+magenta = "${tertiary}"
+red = "${error}"
+white = "${onSurfaceVariant}"
+yellow = "${tertiary_container}"

@@ -1,0 +1,9 @@
+* {
+    background: ${background};
+    background-alt: ${surface_container};
+    foreground: ${onSurface};
+    selected: ${primary};
+    selected-text: ${on_primary};
+    active: ${secondary};
+    urgent: ${error};
+}

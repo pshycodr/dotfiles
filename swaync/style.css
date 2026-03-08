@@ -1,22 +1,15 @@
-:root {
-  /* Catppuccin Mocha base */
-  --base: #1e1e2e;
-  --mantle: #181825;
-  --crust: #11111b;
-  --text: #cdd6f4;
-  --surface0: #313244;
-  --surface1: #45475a;
+@import "colors/dynamic.css";
 
+:root {
   /* Decoration tuning */
-  --bg-opacity: 0.65;          /* lower opacity = stronger perceived blur */
+  --bg-opacity: 0.65;
   --border-radius: 12px;
   --border-width: 1px;
-  --border-color: var(--surface0);
 
   /* Shadow kept subtle to avoid visual stacking bloat */
   --shadow: 0 4px 10px rgba(0,0,0,0.35);
 
-  /* Size configurations (moved from deprecated config.json settings) */
+  /* Size configurations */
   --notification-icon-size: 50px;
   --mpris-album-art-icon-size: 50px;
 }
@@ -28,19 +21,18 @@
 
 /* Control center surface (blur handled by Hyprland layerrule) */
 .control-center {
-  background: rgba(30,30,46,var(--bg-opacity));
+  background: var(--base);
   border-radius: var(--border-radius);
   border: var(--border-width) solid var(--border-color);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
 }
 
-/* Outer widget container – keep tight to avoid compounding margins */
+/* Outer widget container */
 .widgets {
   padding: 8px;
 }
 
-/* Notification row spacing – vertical stack only */
+/* Notification row spacing */
 .control-center .notification-row {
   margin: 4px 0;
 }
@@ -48,16 +40,16 @@
 /* Actual notification card */
 .notification-content {
   padding: 8px;
-  background: rgba(24,24,37,0.85);
+  background: var(--surface0);
   border-radius: 10px;
-  border: 1px solid var(--surface0);
-  box-shadow: none; /* avoid nested shadow inflation */
+  border: 1px solid var(--border-color);
+  box-shadow: none;
 }
 
-/* Hover feedback without layout expansion */
+/* Hover feedback */
 .notification-content:hover {
-  background: rgba(30,30,46,0.9);
-  border-color: var(--surface1);
+  background: var(--surface1);
+  border-color: var(--overlay0);
 }
 
 /* Visual separation between stacked notifications */
@@ -86,15 +78,15 @@
 }
 
 .body {
-  color: #a6adc8;
+  color: var(--subtext);
 }
 
-/* Sliders (volume / backlight) kept compact */
+/* Sliders (volume / backlight) */
 .widget-volume,
 .widget-backlight {
   padding: 8px;
   margin: 4px 8px;
-  background: rgba(30,30,46,var(--bg-opacity));
+  background: var(--surface0);
   border-radius: var(--border-radius);
   border: var(--border-width) solid var(--border-color);
 }
@@ -103,12 +95,12 @@
 .widget-mpris {
   padding: 1px;
   margin: 4px 8px;
-  background: rgba(30,30,46,var(--bg-opacity));
+  background: var(--surface0);
   border-radius: var(--border-radius);
   border: var(--border-width) solid var(--border-color);
 }
 
-/* MPRIS album art with border radius */
+/* MPRIS album art */
 .widget-mpris-album-art {
   border-radius: 0px;
 }
@@ -118,7 +110,7 @@
 .widget-inhibitors {
   padding: 6px 8px;
   margin: 4px 8px;
-  background: rgba(30,30,46,var(--bg-opacity));
+  background: var(--surface0);
   border-radius: var(--border-radius);
   border: var(--border-width) solid var(--border-color);
 }

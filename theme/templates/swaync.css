@@ -1,0 +1,17 @@
+/* Dynamic colors — auto-generated from wallpaper */
+:root {
+    --base: ${background};
+    --mantle: ${surface_container_low};
+    --crust: ${surface_container_lowest};
+    --text: ${onSurface};
+    --subtext: ${onSurfaceVariant};
+    --surface0: ${surface_container};
+    --surface1: ${surface_container_high};
+    --surface2: ${surface_container_highest};
+    --overlay0: ${surface_variant};
+    --accent: ${primary};
+    --accent-text: ${on_primary};
+    --secondary: ${secondary};
+    --error: ${error};
+    --border-color: ${surface_container_high};
+}
