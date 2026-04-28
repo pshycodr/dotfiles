@@ -8,7 +8,7 @@ WALL="$1"
 mkdir -p ~/.cache/matugen
 
 # ── Set wallpaper ─────────────────────────────────────────────────
-swww img "$WALL" --transition-type grow --transition-duration 3
+awww img "$WALL" --transition-type center --transition-duration 3
 
 # ── Auto-extract dominant color using ImageMagick ─────────────────
 # Resize to speed up, quantize to 1 color, output as hex

@@ -3,15 +3,15 @@
     --base: #0e1416;
     --mantle: #181e1f;
     --crust: #060b0d;
-    --text: #f0f5f7;
+    --text: #f0f6f7;
     --subtext: #bfc8cb;
     --surface0: #202527;
     --surface1: #2a3032;
     --surface2: #353b3d;
-    --overlay0: #3f484b;
-    --accent: #83d2e4;
-    --accent-text: #00252c;
-    --secondary: #b2cbd1;
+    --overlay0: #3f484a;
+    --accent: #83d2e3;
+    --accent-text: #00252b;
+    --secondary: #b1cbd1;
     --error: #ffb4ab;
     --border-color: #2a3032;
 }

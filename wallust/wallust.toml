@@ -1,0 +1,3 @@
+[templates.colors_json]
+template = "/home/pshycodr/.config/wallust/templates/colors.json"
+target   = "/home/pshycodr/.cache/wallust/colors.json"

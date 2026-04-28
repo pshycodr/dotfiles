@@ -35,7 +35,7 @@
     "custom/arch": {
         "format": "",
         "tooltip": false,
-        "on-click": "kitty -e sh -c 'fastfetch; read'"
+        "on-click": "kitty -e sh -c 'nerdfetch; read'"
     },
 
     "hyprland/workspaces": {
@@ -56,7 +56,8 @@
         "states": {
             "warning": 70,
             "critical": 90
-        }
+        },
+        "on-click": "alacritty -e sh -c 'btop; read'"
     },
 
     "memory": {
@@ -66,7 +67,8 @@
         "states": {
             "warning": 70,
             "critical": 90
-        }
+        },
+        "on-click": "alacritty -e sh -c 'btop; read'"
     },
 
     "network#speed": {
@@ -76,7 +78,7 @@
         "interval": 2,
         "tooltip": false
     },
-    
+
     "pulseaudio": {
         "format": "{icon} {volume}%",
         "format-bluetooth": "󰂰 {volume}%",
@@ -103,7 +105,8 @@
         "tooltip-format-wifi": "{essid}  {signalStrength}%\n{frequency} MHz",
         "tooltip-format-ethernet": "{ifname}  {ipaddr}",
         "tooltip-format-disconnected": "Disconnected",
-        "max-length": 24
+        "max-length": 24,
+        "on-click": "airctl"
     },
 
     "battery": {
@@ -144,7 +147,7 @@
         "exec": "~/.config/waybar/scripts/bt-battery.sh",
         "interval": 30,
         "tooltip": true,
-        "format": "󰂰 {}",
+        "format": "󰂏{}",
         "tooltip-format": "Bluetooth headset battery"
     }
 }
