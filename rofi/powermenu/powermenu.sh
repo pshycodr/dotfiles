@@ -108,6 +108,7 @@ case ${chosen} in
 		run_cmd --suspend
         ;;
     $logout)
-		run_cmd --logout
+		hyprctl dispatch exit
+		# run_cmd --logout
         ;;
 esac

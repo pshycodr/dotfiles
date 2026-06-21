@@ -114,3 +114,15 @@
   border-radius: var(--border-radius);
   border: var(--border-width) solid var(--border-color);
 }
+
+.notification.critical {
+    background: #ff5555;
+    color: white;
+    border: 2px solid #ff0000;
+}
+
+.notification .app-name {
+    font-weight: bold;
+    font-size: 14px;
+    opacity: 1;
+}
