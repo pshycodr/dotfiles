@@ -1,0 +1,16 @@
+UNIT FILE                          STATE   PRESET
+avahi-daemon.service               enabled disabled
+bluetooth.service                  enabled disabled
+docker.service                     enabled disabled
+gdm.service                        enabled disabled
+getty@.service                     enabled enabled
+NetworkManager-dispatcher.service  enabled disabled
+NetworkManager-wait-online.service enabled disabled
+NetworkManager.service             enabled disabled
+systemd-timesyncd.service          enabled enabled
+tlp.service                        enabled disabled
+avahi-daemon.socket                enabled disabled
+systemd-userdbd.socket             enabled enabled
+remote-fs.target                   enabled enabled
+
+13 unit files listed.

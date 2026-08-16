@@ -99,11 +99,11 @@
           "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && pactl set-sink-mute @DEFAULT_SINK@ 1 || pactl set-sink-mute @DEFAULT_SINK@ 0'",
           "update-command": "sh -c '[[ $(pactl get-sink-mute @DEFAULT_SINK@) == *yes* ]] && echo true || echo false'"
         },
-        {
-          "label": "󰖨",
+ {
+          "label": "󰖨 ",
           "type": "toggle",
-          "command": "if [ \"$SWAYNC_TOGGLE_STATE\" = \"true\" ]; then hyprctl dispatch exec 'hyprsunset --temperature 4500'; else pkill -INT hyprsunset; fi",
-          "update-command": "pgrep -x hyprsunset >/dev/null && echo true || echo false"
+          "command": "sh -c 'if [ $SWAYNC_TOGGLE_STATE = true ]; then pgrep -x hyprsunset >/dev/null || hyprsunset & sleep 0.1; hyprctl hyprsunset temperature 4500; else hyprctl hyprsunset temperature 6500; fi'",
+          "update-command": "sh -c 'hyprctl hyprsunset | grep -q Temperature: 4500 && echo true || echo false'"
         }
       ]
     }

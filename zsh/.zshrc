@@ -116,6 +116,7 @@ alias fm='nautilus'
 alias config='code ~/.config'
 alias ldoc='lazydocker'
 alias cd='z'
+alias zed='zeditor'
 alias cng-theme='~/.config/dotfiles/rofi/scripts/wallpaper.sh'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -130,3 +131,13 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 eval "$(zoxide init zsh)"
 export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/pshycodr/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end

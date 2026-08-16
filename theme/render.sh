@@ -93,9 +93,47 @@ HYPR_VARS='$primary_nohash $surface_variant_nohash $shadow_nohash'
 envsubst "$VARS" < "$TEMPLATES/waybar.css"      > ~/.config/dotfiles/waybar/colors/dynamic.css
 envsubst "$VARS" < "$TEMPLATES/rofi.rasi"        > ~/.config/dotfiles/rofi/colors/dynamic.rasi
 envsubst "$VARS" < "$TEMPLATES/swaync.css"       > ~/.config/dotfiles/swaync/colors/dynamic.css
-envsubst "$VARS $HYPR_VARS" < "$TEMPLATES/hyprland.conf"    > ~/.config/dotfiles/hypr/dynamic.conf
+envsubst "$VARS $HYPR_VARS" < "$TEMPLATES/hyprland.lua"    > ~/.config/dotfiles/hypr/dynamic.lua
 envsubst "$VARS" < "$TEMPLATES/alacritty.toml"   > ~/.config/dotfiles/alacritty/colors.toml
 envsubst "$VARS" < "$TEMPLATES/kitty.conf"       > ~/.config/dotfiles/kitty/colors.conf
+
+# ── Helper: strip JS-style comments + trailing commas from JSONC ──
+strip_jsonc() {
+    perl -0777 -pe '
+        s{"(?:\\.|[^"\\])*"(*SKIP)(*FAIL)|//[^\n]*|/\*.*?\*/}{}gs;
+        s/,(\s*[}\]])/$1/g;
+    ' "$1"
+}
+
+# # ── VS Code / Cursor / VSCodium ────────────────────────────────────
+# for VSCODE_DIR in "$HOME/.config/Code/User" "$HOME/.config/Cursor/User" "$HOME/.config/VSCodium/User"; do
+#     [ -d "$VSCODE_DIR" ] || continue
+#     SETTINGS="$VSCODE_DIR/settings.json"
+#     [ -f "$SETTINGS" ] || echo '{}' > "$SETTINGS"
+
+#     # Notice: Switched template name to match our newly created JSON template
+#     RENDERED=$(envsubst "$VARS" < "$TEMPLATES/vscode-colors.json")
+
+#     if strip_jsonc "$SETTINGS" | jq -s '.[0] * .[1]' - <(echo "$RENDERED") > "$SETTINGS.tmp" 2>/dev/null; then
+#         mv "$SETTINGS.tmp" "$SETTINGS"
+#     else
+#         rm -f "$SETTINGS.tmp"
+#         echo "Warning: couldn't merge into $SETTINGS even after stripping comments"
+#     fi
+# done
+
+# ── Zed ─────────────────────────────────────────────────────────────
+ZED_SETTINGS="$HOME/.config/zed/settings.json"
+if [ -d "$HOME/.config/zed" ]; then
+    [ -f "$ZED_SETTINGS" ] || echo '{}' > "$ZED_SETTINGS"
+    RENDERED=$(envsubst "$VARS" < "$TEMPLATES/zed-theme-overrides.json")
+    if strip_jsonc "$ZED_SETTINGS" | jq -s '.[0] * .[1]' - <(echo "$RENDERED") > "$ZED_SETTINGS.tmp" 2>/dev/null; then
+        mv "$ZED_SETTINGS.tmp" "$ZED_SETTINGS"
+    else
+        rm -f "$ZED_SETTINGS.tmp"
+        echo "Warning: couldn't merge into $ZED_SETTINGS even after stripping comments"
+    fi
+fi
 
 # ── GTK-4.0: sed-replace catppuccin mocha colors with dynamic ones ──
 GTK4_DIR="$HOME/.config/dotfiles/gtk-4.0"

@@ -84,7 +84,6 @@ if pgrep -x nautilus &>/dev/null; then
   nautilus -q 2>/dev/null
   sleep 0.3
   nautilus --daemon &
-fi43
-
+fi
 # Disown background processes so they don't die with this script
 disown 2>/dev/null

@@ -1,0 +1,12 @@
+require("dynamic")
+
+require("modules.monitors")
+require("modules.programs")
+require("modules.autostart")
+require("modules.environment")
+require("modules.permissions")
+require("modules.looknfeel")
+require("modules.layouts")
+require("modules.input")
+require("modules.keybinds")
+require("modules.rules")

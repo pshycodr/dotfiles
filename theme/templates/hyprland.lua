@@ -1,0 +1,8 @@
+hl.config({
+    general = {
+        col = {
+            active_border = "rgba(${primary_nohash}ee)",
+            inactive_border = "rgba(${surface_variant_nohash}aa)",
+        },
+    },
+})
