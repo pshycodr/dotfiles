@@ -224,13 +224,15 @@ hl.bind(
 )
 
 -- ── Window Switcher ───────────────────────────────────────────────────────────
-
 -- Cycle to next window (Alt+Tab)
+local layout = "smartgrid"
+
 hl.bind(
     "ALT + Tab",
-    hl.dsp.exec_cmd("snappy-switcher next")
+    hl.dsp.exec_cmd(
+        "quickshell ipc -c qs-hyprview call expose toggle " .. layout
+    )
 )
-
 -- Cycle to previous window (Alt+Shift+Tab)
 hl.bind(
     "ALT + SHIFT + Tab",

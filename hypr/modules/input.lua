@@ -7,32 +7,29 @@ hl.config({
         kb_rules = "",
 
         follow_mouse = 1,
-        sensitivity = 0.5,
+        sensitivity = -0.5,
 
         touchpad = {
             natural_scroll = true,
         },
-    },
-
-    gestures = {
-        gesture = {
-            "3, horizontal, workspace",
-        },
-    },
-
-    device = {
-        {
-            name = "epic-mouse-v1",
-            sensitivity = -0.5,
-        },
-        {
-            name = "asup1204:00-093a:2642-touchpad", -- Laptop touch pad
-            enabled = true,
-        },
-        {
-            name = "2.4g-receiver-mouse",
-            sensitivity = -0.3,
-            accel_profile = "flat",
-        },
-    },
+    }
 })
+
+hl.gesture({
+    fingers = 3,
+    direction = "horizontal",
+    action = "workspace",
+})
+
+hl.device({
+    name = "asup1204:00-093a:2642-touchpad",
+    enabled = true,
+    sensitivity = 0.5,
+})
+
+hl.device({
+    name = "2.4g-receiver-mouse",
+    sensitivity = -0.5,
+    accel_profile = "adaptive",
+})
+
